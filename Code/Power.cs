@@ -17,15 +17,15 @@ namespace ModernMod
         private void initPower()
         {
             Debug.LogWarning("TESTEST");
-            godPower();
+            //godPower();
 
-            var spriteUpgrade = Mod.EmbededResources.LoadSprite($"{Mod.Info.Name}.Resources.images.icon.UpgradeBuilding.png");
-            var newButtonUpgrade = PowerButtons.CreateButton("upgradeBuilding", spriteUpgrade, "Upgrade Building", "Upgrade building level right now without any cost to villagers", Vector2.zero, ButtonType.GodPower);      
-            PowerButtons.AddButtonToTab(newButtonUpgrade, PowerTab.Drawing, new Vector2(464.60f, 18));
+            //var spriteUpgrade = Mod.EmbededResources.LoadSprite($"{Mod.Info.Name}.Resources.images.icon.UpgradeBuilding.png");
+            //var newButtonUpgrade = PowerButtons.CreateButton("upgradeBuilding", spriteUpgrade, "Upgrade Building", "Upgrade building level right now without any cost to villagers", Vector2.zero, ButtonType.GodPower);      
+            //PowerButtons.AddButtonToTab(newButtonUpgrade, PowerTab.Drawing, new Vector2(464.60f, 18));
 
-            var spriteDowngrade = Mod.EmbededResources.LoadSprite($"{Mod.Info.Name}.Resources.images.icon.DowngradeBuilding.png");
-            var newButtonDowngrade = PowerButtons.CreateButton("downgradeBuilding", spriteDowngrade, "Downgrade Building", "Downgrade building level right now without any payback to villagers", Vector2.zero, ButtonType.GodPower);      
-            PowerButtons.AddButtonToTab(newButtonDowngrade, PowerTab.Drawing, new Vector2(464.60f, -18));
+            //var spriteDowngrade = Mod.EmbededResources.LoadSprite($"{Mod.Info.Name}.Resources.images.icon.DowngradeBuilding.png");
+            //var newButtonDowngrade = PowerButtons.CreateButton("downgradeBuilding", spriteDowngrade, "Downgrade Building", "Downgrade building level right now without any payback to villagers", Vector2.zero, ButtonType.GodPower);      
+            //PowerButtons.AddButtonToTab(newButtonDowngrade, PowerTab.Drawing, new Vector2(464.60f, -18));
         }
 
         private void godPower()
@@ -87,7 +87,9 @@ namespace ModernMod
                 var spriteAnimation = Reflection.GetField(building.GetType(), building, "spriteAnimation") as SpriteAnimation;
                 var stats = Reflection.GetField(building.GetType(), building, "stats") as BuildingAsset;
                 var data = Reflection.GetField(building.GetType(), building, "data") as BuildingData;
-                if (stats.canBeUpgraded && !((data.state == BuildingState.Ruins) || data.under_construction || data.state == BuildingState.CivAbandoned))
+                Building buildingObj = new Building();
+                bool isUnderConstruction = buildingObj.isUnderConstruction(); 
+                if (stats.canBeUpgraded && !((data.state == BuildingState.Ruins) || isUnderConstruction || data.state == BuildingState.CivAbandoned))
                 {
 
                     BuildingAsset pTemplate = AssetManager.buildings.get(stats.upgradeTo);
@@ -106,9 +108,10 @@ namespace ModernMod
                     spriteAnimation.stopAt(0, true);
                     building.CallMethod("setSpriteMain", true);
                     building.CallMethod("updateStats");
-                    var curStats = Reflection.GetField(building.GetType(), building, "curStats") as BaseStats;
-
-                    data.health = curStats.base_stats[S.health];
+                    // var curStats = Reflection.GetField(building.GetType(), building, "curStats") as BaseStats;
+                    //
+                    // data.health = curStats.base_stats[S.health];
+                    data.health = 1000;
                 }
 
             }
@@ -128,8 +131,9 @@ namespace ModernMod
 
 
                 var downgradeTo = AssetManager.buildings.list.Find(b => b.upgradeTo == stats.id);
-
-                if (downgradeTo != null && !((data.state == BuildingState.Ruins) || data.under_construction || data.state == BuildingState.CivAbandoned))
+                Building buildingObj = new Building();
+                bool isUnderConstruction = buildingObj.isUnderConstruction(); 
+                if (downgradeTo != null && !((data.state == BuildingState.Ruins) || isUnderConstruction || data.state == BuildingState.CivAbandoned))
                 {
                     BuildingAsset pTemplate = AssetManager.buildings.get(downgradeTo.id);
 
@@ -149,9 +153,9 @@ namespace ModernMod
                     building.CallMethod("setSpriteMain", true);
                     building.CallMethod("updateStats");
 
-                    var curStats = Reflection.GetField(building.GetType(), building, "curStats") as BaseStats;
+                   
 
-                    data.health = curStats.base_stats[S.health];
+                    data.health = 1000;
                 }
 
             }

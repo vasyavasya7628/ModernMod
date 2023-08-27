@@ -24,7 +24,7 @@ namespace ModernMod
     {
         private void initPower()
         {	
-			action_godPower();
+			godPower();
 			buttonUpgradeBuilding();
 			buttonDowngradeBuilding();
 			
@@ -33,7 +33,8 @@ namespace ModernMod
 		private void buttonUpgradeBuilding()
 		{
 			var spriteUpgrade = NCMS.Utils.Sprites.LoadSprite(
-				$"{Mod.Info.Name}.Resources.images.icon.UpgradeBuilding.png");
+                $"{Mod.Info.Path}/EmbededResources/images/icon/UpgradeBuilding.png");
+            
 
             var buttonUpgradeBuilding = NCMS.Utils.PowerButtons.CreateButton("Button_UpgradeBuilding",
                 spriteUpgrade, 
@@ -41,35 +42,33 @@ namespace ModernMod
                 "This is the example button",
                 Vector2.zero,
                 NCMS.Utils.ButtonType.Click,
-                null,
-                action_upgradeBuilding);
+                null);
 
             NCMS.Utils.PowerButtons.AddButtonToTab(buttonUpgradeBuilding,
                 NCMS.Utils.PowerTab.Drawing,
-                new Vector2(332, -18));
+                new Vector2(512f, -18));
 		}
 
 		private void buttonDowngradeBuilding()
 		{
 			var spriteDowngrade = NCMS.Utils.Sprites.LoadSprite(
-				$"{Mod.Info.Name}.Resources.images.icon.DowngradeBuilding.png");
-
+                $"{Mod.Info.Path}/EmbededResources/images/icon/DowngradeBuilding.png");
+				
             var buttonDowngradeBuilding = NCMS.Utils.PowerButtons.CreateButton("Button_DowngradeBuilding",
-                spriteDownGrade, 
+                spriteDowngrade, 
 				"Downgrade Button", 
                 "This is the example",
                 Vector2.zero,
                 NCMS.Utils.ButtonType.Click,
-                null,
-                action_downgradeBuilding);
+                null);
 
             NCMS.Utils.PowerButtons.AddButtonToTab(buttonDowngradeBuilding,
                 NCMS.Utils.PowerTab.Drawing,
-                new Vector2(400, -18));
+                new Vector2(412f, 18));
 		}
 		
 		
-        private void action_godPower()
+        private void godPower()
         {
             GodPower upgradeBuilding = AssetManager.powers.clone("upgradeBuilding", "_drops");
             //upgradeBuilding.id = "upgradeBuilding";

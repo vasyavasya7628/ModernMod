@@ -14,28 +14,28 @@ namespace ModernMod
         {
             #region Houses
             //house 5 HUMANS
-            BuildingAsset humanH5 = AssetManager.buildings.get("5house_human");
+            BuildingAsset humanH5 = AssetManager.buildings.get("house_human_5");
             humanH5.canBeUpgraded = true;
             humanH5.upgradeTo = "6house_human";
 
             //house 5 ELVES
-            BuildingAsset elfH5 = AssetManager.buildings.get("5house_elf");
+            BuildingAsset elfH5 = AssetManager.buildings.get("house_elf_5");
             elfH5.canBeUpgraded = true;
             elfH5.upgradeTo = "6house_elf";
 
             //house 5 ORCS
-            BuildingAsset orcH5 = AssetManager.buildings.get("5house_orc");
+            BuildingAsset orcH5 = AssetManager.buildings.get("house_orc_5");
             orcH5.canBeUpgraded = true;
             orcH5.upgradeTo = "6house_orc";
 
             //house 5 DWARFES
-            BuildingAsset dwarfH5 = AssetManager.buildings.get("5house_dwarf");
+            BuildingAsset dwarfH5 = AssetManager.buildings.get("house_dwarf_5");
             dwarfH5.canBeUpgraded = true;
             dwarfH5.upgradeTo = "6house_dwarf";
 
 
             //construction between 5 and 7 HUMANS
-            var constructionH6 = AssetManager.buildings.clone("6house_human", "5house_human");
+            var constructionH6 = AssetManager.buildings.clone("6house_human", "house_human_5");
             constructionH6.shadow = false;
             constructionH6.cost = new ConstructionCost(0, 10, 10, 10);
             constructionH6.fundament = new BuildingFundament(1, 1, 2, 0);
@@ -260,28 +260,28 @@ namespace ModernMod
 
             #region halls
             //hall 2 HUMANS
-            BuildingAsset humanHall2 = AssetManager.buildings.get("2hall_human");
+            BuildingAsset humanHall2 = AssetManager.buildings.get("hall_human_2");
             humanHall2.canBeUpgraded = true;
             humanHall2.upgradeTo = "3hall_human";
 
             //hall 2 ELVES
-            BuildingAsset elfHall2 = AssetManager.buildings.get("2hall_elf");
+            BuildingAsset elfHall2 = AssetManager.buildings.get("hall_elf_2");
             elfHall2.canBeUpgraded = true;
             elfHall2.upgradeTo = "3hall_elf";
 
             //hall 2 ORCS
-            BuildingAsset orcHall2 = AssetManager.buildings.get("2hall_orc");
+            BuildingAsset orcHall2 = AssetManager.buildings.get("hall_orc_2");
             orcHall2.canBeUpgraded = true;
             orcHall2.upgradeTo = "3hall_orc";
 
             //hall 2 DWARFES
-            BuildingAsset dwarfHall2 = AssetManager.buildings.get("2hall_dwarf");
+            BuildingAsset dwarfHall2 = AssetManager.buildings.get("hall_dwarf_2");
             dwarfHall2.canBeUpgraded = true;
             dwarfHall2.upgradeTo = "3hall_dwarf";
 
 
             //hall 3 HUMANS
-            var humanHall3 = AssetManager.buildings.clone("3hall_human", "2hall_human");
+            var humanHall3 = AssetManager.buildings.clone("3hall_human", "hall_human_2");
             humanHall3.cost = new ConstructionCost(0, 20, 1, 150);
             humanHall3.housing = 15;
             humanHall3.upgradeLevel = 3;

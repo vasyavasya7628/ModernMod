@@ -15,16 +15,15 @@ namespace ModernMod
     public partial class WorldBoxMod : MonoBehaviour
     {
         private void initPower()
-        {
+        {	
             action_godPower();
-
             var spriteUpgrade = Mod.EmbededResources.LoadSprite(
 				$"{Mod.Info.Name}.Resources.images.icon.UpgradeBuilding.png");
 
             var modernModTab = PowerButtons.CreateButton(
 				"upgradeBuilding",
-            	spriteUpgrade, "
-				Upgrade Building",
+            	spriteUpgrade,
+				"Upgrade Building",
             	"Upgrade building level right now without any cost to villagers",
             	Vector2.zero,
            		ButtonType.GodPower,
@@ -51,7 +50,7 @@ namespace ModernMod
 				PowerTab.Drawing, 
 				new Vector2(464.60f, -18));
         }
-
+		
         private void action_godPower()
         {
             GodPower upgradeBuilding = AssetManager.powers.clone("upgradeBuilding", "_drops");

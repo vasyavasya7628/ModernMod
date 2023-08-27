@@ -1,14 +1,22 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
-using ReflectionUtility;
-using System.Reflection;
-using HarmonyLib;
+﻿using System;
 using System.IO;
+using System.Text;
+using System.Threading.Tasks;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
+using Newtonsoft.Json.Converters;
+using Newtonsoft.Json.Linq;
+using NCMS;
+using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using ReflectionUtility;
 using static Config;
-//using Helper;
-using NCMS.Utils;
 
 namespace ModernMod
 {
@@ -16,40 +24,50 @@ namespace ModernMod
     {
         private void initPower()
         {	
-            action_godPower();
-            var spriteUpgrade = Mod.EmbededResources.LoadSprite(
+			action_godPower();
+			buttonUpgradeBuilding();
+			buttonDowngradeBuilding();
+			
+        }
+		
+		private void buttonUpgradeBuilding()
+		{
+			var spriteUpgrade = NCMS.Utils.Sprites.LoadSprite(
 				$"{Mod.Info.Name}.Resources.images.icon.UpgradeBuilding.png");
 
-            var modernModTab = PowerButtons.CreateButton(
-				"upgradeBuilding",
-            	spriteUpgrade,
-				"Upgrade Building",
-            	"Upgrade building level right now without any cost to villagers",
-            	Vector2.zero,
-           		ButtonType.GodPower,
-				null,
-				action_godPower);      
+            var buttonUpgradeBuilding = NCMS.Utils.PowerButtons.CreateButton("Button_UpgradeBuilding",
+                spriteUpgrade, 
+				"Upgrade Button", 
+                "This is the example button",
+                Vector2.zero,
+                NCMS.Utils.ButtonType.Click,
+                null,
+                action_upgradeBuilding);
 
-            PowerButtons.AddButtonToTab(
-				modernModTab,
- 				PowerTab.Drawing,
- 				new Vector2(464.60f, 18));
+            NCMS.Utils.PowerButtons.AddButtonToTab(buttonUpgradeBuilding,
+                NCMS.Utils.PowerTab.Drawing,
+                new Vector2(332, -18));
+		}
 
-            var spriteDowngrade = Mod.EmbededResources.LoadSprite(
+		private void buttonDowngradeBuilding()
+		{
+			var spriteDowngrade = NCMS.Utils.Sprites.LoadSprite(
 				$"{Mod.Info.Name}.Resources.images.icon.DowngradeBuilding.png");
 
-            var newButtonDowngrade = PowerButtons.CreateButton(
-				"downgradeBuilding", 
-				spriteDowngrade, 
-				"Downgrade Building", 
-				"Downgrade building level right now without any payback to villagers", 
-				Vector2.zero,
-				ButtonType.GodPower);
-     
-            PowerButtons.AddButtonToTab(newButtonDowngrade,
-				PowerTab.Drawing, 
-				new Vector2(464.60f, -18));
-        }
+            var buttonDowngradeBuilding = NCMS.Utils.PowerButtons.CreateButton("Button_DowngradeBuilding",
+                spriteDownGrade, 
+				"Downgrade Button", 
+                "This is the example",
+                Vector2.zero,
+                NCMS.Utils.ButtonType.Click,
+                null,
+                action_downgradeBuilding);
+
+            NCMS.Utils.PowerButtons.AddButtonToTab(buttonDowngradeBuilding,
+                NCMS.Utils.PowerTab.Drawing,
+                new Vector2(400, -18));
+		}
+		
 		
         private void action_godPower()
         {
